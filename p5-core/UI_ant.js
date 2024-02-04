@@ -1,6 +1,4 @@
-// TODO change the updateAntBehavoir function to updateAntSpeed and update existing code.
-// Create a new selector that will be called updateAntBehavior. This is where we will add
-// new behaviors such as "follow mouse".
+// TODO: Create selector will add new behaviors such as "follow mouse" or "move randomly".
 
 class UI_ant {
     constructor() {
@@ -22,7 +20,6 @@ class UI_ant {
     }
 
     // You might want to add methods here that update the UI based on the state of the simulation
-
     updateAntSpeed() {
         const speed = this.speedSelector.value();
         switch (speed) {
