@@ -19,7 +19,7 @@ class UI_ant {
         this.speedSelector.changed(() => this.updateAntSpeed());
     }
 
-    // You might want to add methods here that update the UI based on the state of the simulation
+    // Add methods here that update the UI based on the state of the simulation
     updateAntSpeed() {
         const speed = this.speedSelector.value();
         switch (speed) {

@@ -12,9 +12,8 @@ class Ant{
         Ant.currentCount++; // Increment the count only if a new ant is successfully created
       } else {
         // Handle the case when the max amount is reached
-        // For example, you might not create the ant, or you could replace an existing one.
         console.log('Maximum number of ants reached');
-        return null; // Indicate that no new ant was created
+        return null; // No new ant was created
       }
     }
 
