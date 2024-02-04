@@ -11,12 +11,20 @@ class UI_ant {
         this.resetButton = createButton('Reset Canvas');
         this.resetButton.mousePressed(() => AntManager.resetAnts());
     
-        // SELECTORS
+        //// SELECTORS
+
+        // Speed
         this.speedSelector = createSelect();
         this.speedSelector.option('Normal Speed');
         this.speedSelector.option('Double Speed');
         this.speedSelector.option('Half Speed');
         this.speedSelector.changed(() => this.updateAntSpeed());
+    
+        // Movement
+        this.movementSelector = createSelect();
+        this.movementSelector.option('Move Random');
+        this.movementSelector.option('Follow Mouse'); 
+        this.movementSelector.changed(() => this.updateAntMovement());
     }
 
     // Add methods here that update the UI based on the state of the simulation
@@ -35,4 +43,15 @@ class UI_ant {
         }
     }
 
+    updateAntMovement(){
+        const movement = this.movementSelector.value();
+        switch(movement){
+            case 'Move Random':
+                // Have ant manager tell ants to move random
+                break;
+            case 'Follow Mouse':
+                // Have ant manager tell ants to follow mouse
+                break;
+        }
+    }    
 }
