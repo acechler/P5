@@ -1,4 +1,4 @@
-AFK Notes
+# AFK Notes
 
 * add updateMovementBehavior to antManager class
 ```js
