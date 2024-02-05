@@ -4,3 +4,5 @@
 ```js
 updateMovementBehavior(){}
 ```
+
+* I need to implement better UI that can adapt to mobile devices.
