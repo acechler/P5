@@ -1,10 +1,16 @@
+let sineWaveGenerator;
+  
 function setup() {
-    createCanvas(600, 400);
+  sineWaveGenerator = new SineWaveGenerator(1, 0.5, 1, 1);
+  sineWaveGenerator.setup();
+}
 
-  }
-  
-  function draw() {
-    background(220);
+function draw() {
+  sineWaveGenerator.draw();
+}
 
+function keyReleased() {
+  if (key === ' ') {
+    sineWaveGenerator.toggleTrace();
   }
-  
+}
