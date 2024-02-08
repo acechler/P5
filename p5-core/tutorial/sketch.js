@@ -1,16 +1,11 @@
 let sineWaveGenerator;
-  
+
 function setup() {
-  sineWaveGenerator = new SineWaveGenerator(1, 0.5, 1, 1);
-  sineWaveGenerator.setup();
+  createCanvas(400, 200);
 }
 
 function draw() {
-  sineWaveGenerator.draw();
+  let mySineWave = new SineWave(50, 1, 0); // Example: amplitude 50, frequency 1, phase 0
+  mySineWave.display();
 }
 
-function keyReleased() {
-  if (key === ' ') {
-    sineWaveGenerator.toggleTrace();
-  }
-}
