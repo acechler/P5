@@ -10,3 +10,8 @@ function draw(){
     circle(mouseX, mouseY, 24);
 
 }
+
+// Clear the canvas
+function mousePressed(){
+    background(0);
+}
