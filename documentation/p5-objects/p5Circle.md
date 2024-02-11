@@ -1,3 +1,9 @@
+# Circle object
+
+Custom circle object that starts on (0,0) and travels diagonally down the canvas.
+
+
+```js
 
 class Circle{
     constructor(x,y, size){
@@ -18,7 +24,9 @@ class Circle{
     }
 }
 
+// Declaration of Object
 const mycircle = new Circle(0,0,64);
+
 function setup() {
     createCanvas(400, 400);
     background(0);
@@ -34,3 +42,5 @@ function draw(){
     fill(255);
     mycircle.draw();
 }
+
+```
