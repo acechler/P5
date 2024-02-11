@@ -1,19 +1,25 @@
-// Tutorial Link: https://youtu.be/dRhXIIFp-ys?si=FZeYOR9PkJKSunhz
+
+
+let circleX = 100;
+let circleY = 100;
+
 
 function setup() {
     createCanvas(400, 400);
     background(0);
 }
 
-
-function draw(){
-    noStroke();
-    fill(255);
-    circle(mouseX, mouseY, 24);
-
+function mousePressed(){
+    circleX = 0;
+    circleY = 0;
 }
 
-// Clear the canvas
-function mousePressed(){
+function draw(){
     background(0);
+    noStroke();
+    fill(255);
+    circle(circleX, circleY, 64);
+
+    circleX = circleX + 5;
+    circleY = circleY + 5;
 }
