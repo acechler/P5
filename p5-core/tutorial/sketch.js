@@ -21,7 +21,7 @@ function draw() {
   for(let i = 0; i < 50; i++){
     coords1._x += Math.sin(coords1._y);
     coords1._y += Math.sin(coords1._x);
-    rect(coords1._x * i, coords1._y * i, 10, 10);
+    rect(coords1._x * i, coords1._y * i, 8, 8);
     
     for(let j = 0; j < 25; j++){
       coords2._x += Math.sin(coords2._y);
