@@ -1,22 +1,22 @@
 // Setup function to initialize the canvas and UI elements
 function setup() {
-    createCanvas(600, 400);
+    createCanvas(800, 800);
     //squareUI = new SquareUI(); // Initialize UI elements for square manipulation
   }
   
   // Draw function to render the square
  
-  let x = 1;
-  let y = 1;
+  let x = 10;
+  let y = 10;
   function draw() {
     background(220);
     //squareUI.display();
-    for(let i = 0; i < 100; i++){
+    for(let i = 0; i < 50; i++){
+      x+=Math.sin(y);
+      y+=Math.sin(x);
       rect(x*i, y*i, 10, 10);
       stroke(0);
     }
-    x+=Math.sin(y);
-    y+=Math.sin(x);
     
   }
   
