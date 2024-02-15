@@ -1,13 +1,23 @@
 // Setup function to initialize the canvas and UI elements
 function setup() {
     createCanvas(600, 400);
-    squareUI = new SquareUI(); // Initialize UI elements for square manipulation
+    //squareUI = new SquareUI(); // Initialize UI elements for square manipulation
   }
   
   // Draw function to render the square
+ 
+  let x = 1;
+  let y = 1;
   function draw() {
     background(220);
-    squareUI.display();
+    //squareUI.display();
+    for(let i = 0; i < 100; i++){
+      rect(x*i, y*i, 10, 10);
+      stroke(0);
+    }
+    x+=Math.sin(y);
+    y+=Math.sin(x);
+    
   }
   
   // SquareUI class for managing UI elements and interactions
