@@ -1,37 +1,49 @@
-function getCoords(x, y){
-  return{
+function getCoords(x, y) {
+  // Function to calculate distance from another point
+  function distanceFrom(xOther, yOther) {
+    return Math.sqrt(Math.pow(xOther - x, 2) + Math.pow(yOther - y, 2));
+  }
+
+  // Function to update the coordinates
+  function updateCoords(newX, newY) {
+    x = newX;
+    y = newY;
+  }
+
+  // Return the coordinates along with the built-in functions
+  return {
     _x: x,
-    _y: y
+    _y: y,
+    distanceFrom: distanceFrom,
+    updateCoords: updateCoords
   };
 }
 
-// Setup function to initialize the canvas and UI elements
 function setup() {
   createCanvas(800, 800);
-  //squareUI = new SquareUI(); // Initialize UI elements for square manipulation
+  noLoop();
 }
-
-let coords1 = getCoords(20, 20);
-let coords2 = getCoords(20, 20);
 
 function draw() {
   background(220);
-  //squareUI.display();
-  stroke(0); // Set stroke color once, applicable to all shapes drawn in this frame
-  for(let i = 0; i < 50; i++){
-    coords1._x += Math.sin(coords1._y);
-    coords1._y += Math.sin(coords1._x);
-    rect(coords1._x * i, coords1._y * i, 8, 8);
-    
-    for(let j = 0; j < 25; j++){
-      coords2._x += Math.sin(coords2._y);
-      coords2._y += Math.sin(coords2._x);
-      rect(coords2._x * j, coords2._y* j, 8, 8);
+  
+  let numCols = 50;
+  let numRows = 20;
+  let spacing = width / numCols;
+  
+  for (let row = 0; row < numRows; row++) {
+    let y = row * spacing + spacing / 2;
+    for (let col = 0; col < numCols; col++) {
+      let x = col * spacing + spacing / 2;
+      let coords = getCoords(x, y); // Use coords for drawing circles
+      let diameter = spacing - row;
+      
+      //fill(100, 100, 200, 150);
+      rect(coords._x, coords._y, coords.distanceFrom(x,y), coords.distanceFrom(y,x)); // Use diameter for both width and height for consistency
     }
   }
 }
 
-  
   // SquareUI class for managing UI elements and interactions
   class SquareUI {
     constructor() {
