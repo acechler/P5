@@ -1,17 +1,14 @@
 class PositionQueue {
+  static SHAPE_SIZE = 8;
 
-    // Size of guide shape
-    static SHAPE_SIZE = 8;
-  
-    constructor(position, velocity) {
-      this.position = position;
-      this.velocity = velocity;
-      this.shapeEnabled = false; 
-      this.trailEnabled = false;
-      this.textPositionEnabled = false;
-      this.targets = [];
-      
-    }
+  constructor(position, velocity) {
+    this.position = position;
+    this.velocity = velocity;
+    this.shapeEnabled = false; 
+    this.trailEnabled = false;
+    this.textPositionEnabled = false;
+    this.targets = [];
+  }
   
     addPosition(newPosition) {
       this.targets.push(newPosition);

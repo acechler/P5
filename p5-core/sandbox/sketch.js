@@ -1,19 +1,17 @@
-
-class Human{
-  constructor(position, velocity){
-    this.position = position;
-    this.velocity = velocity;
-    let movementQueue = new PositionQueue(position, velocity);
-    // Although default, I really want to know the state of these.
-    movementQueue.enableShape(false);
-    movementQueue.enableTrail(false);
+class Human {
+  constructor(position, velocity) {
+    // Assuming position and velocity should be vectors
+    this.position = createVector(position, position); // Corrected for demonstration
+    this.velocity = createVector(velocity, velocity); // Creating vectors for position & velocity
+    
+    this.movementQueue = new PositionQueue(this.position, this.velocity); // Now a property of Human
+    this.movementQueue.enableShape(true);
+    this.movementQueue.enableTrail(false);
   }
 
-  draw(){
-    stroke(0);
-    strokeWeight(2);
-    fill(127);
-    ellipse(this.position.x, this.position.y, PositionQueue.SHAPE_SIZE, PositionQueue.SHAPE_SIZE);
+  draw() {
+    // Corrected to use properties of the Human class
+    rect(this.position.x, this.position.y, 50, 50); // Corrected to use Human's position
   }
 }
 
@@ -21,11 +19,14 @@ let testHuman;
 
 function setup() {
   createCanvas(400, 200);
-  testHuman = new Human(25,25,40);
+  // Create a Human instance correctly. Assuming the parameters are intended to be initial positions.
+  testHuman = new Human(25, 25); // Corrected to match Human constructor
 }
 
 function draw() {
   background(255);
-  testHuman.draw();
+  testHuman.movementQueue.draw();
 }
-
+function mousePressed() {
+  testHuman.movementQueue.addPosition({x: mouseX, y: mouseY});
+}
