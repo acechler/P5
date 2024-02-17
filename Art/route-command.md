@@ -1,3 +1,8 @@
+Route Command Code
+
+this shows a shape traveling to a queue of positions.
+
+```js
 
 let position;
 let velocity;
@@ -52,3 +57,6 @@ function draw() {
 function mousePressed() {
   targets.push({ x: mouseX, y: mouseY }); // Add a new target point to the queue
 }
+
+
+```
