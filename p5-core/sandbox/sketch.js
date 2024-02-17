@@ -10,41 +10,48 @@
     x = newX;
     y = newY;
   }
-  function setup() {
-    createCanvas(640, 360);
-    background(255);
-    position = createVector(100, 100); // Starting position
-    velocity = createVector(0, 0); // Initial velocity is zero
-    target = position.copy(); // Initialize target at starting position
-  }
+  let position;
+let velocity;
+let targets = []; // Queue to store target points
+
+function setup() {
+  createCanvas(640, 360);
+  background(255);
+  position = createVector(100, 100); // Starting position
+  velocity = createVector(0, 0); // Initial velocity is zero
+}
+
+function draw() {
+  background(255);
   
-  function draw() {
-    background(255);
+  if (targets.length > 0) {
+    let target = createVector(targets[0].x, targets[0].y); // Current target is the first item in the queue
+    let direction = p5.Vector.sub(target, position); // Calculate direction towards the target
     
-    let direction = p5.Vector.sub(target, position); // Calculate direction towards target
-    if (direction.mag() > 1) { // Check if the shape is close to the target
-      direction.setMag(2); // Set the magnitude of the direction to control speed
-      velocity = direction; // Update velocity to move towards the target
-      position.add(velocity); // Add the velocity to the position
+    if (direction.mag() > 1) {
+      direction.setMag(2); // Control the speed of movement
+      position.add(direction); // Move towards the target
     } else {
-      velocity.set(0, 0); // Stop the movement when close to the target
+      targets.shift(); // Remove the reached target from the queue
     }
-  
-    if ((position.x > width) || (position.x < 0)) {
-      velocity.x = velocity.x * -1;
-    }
-    if ((position.y > height) || (position.y < 0)) {
-      velocity.y = velocity.y * -1;
-    }
-  
-    // Display circle at the current position
-    stroke(0);
-    strokeWeight(2);
-    fill(127);
-    ellipse(position.x, position.y, 48, 48);
   }
+
+  // Display the shape at the current position
+  stroke(0);
+  strokeWeight(2);
+  fill(127);
+  ellipse(position.x, position.y, 48, 48);
   
-  function mousePressed() {
-    target.set(mouseX, mouseY); // Update target to mouse position
+  // Optionally, draw lines to all targets in the queue
+  stroke(100, 100, 250, 100); // Light blue with some transparency
+  beginShape();
+  vertex(position.x, position.y);
+  for (let target of targets) {
+    vertex(target.x, target.y);
   }
-  
+  endShape();
+}
+
+function mousePressed() {
+  targets.push({x: mouseX, y: mouseY}); // Add a new target point to the queue
+}
