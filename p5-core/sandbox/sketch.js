@@ -1,10 +1,14 @@
 class PositionQueue {
+
+  static SHAPE_SIZE = 8;
+
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
     this.shapeEnabled = false; 
     this.trailEnabled = false;
     this.targets = [];
+    
   }
 
   addPosition(newPosition) {
@@ -44,7 +48,7 @@ class PositionQueue {
     stroke(0);
     strokeWeight(2);
     fill(127);
-    ellipse(this.position.x, this.position.y, 48, 48);
+    ellipse(this.position.x, this.position.y, PositionQueue.SHAPE_SIZE, PositionQueue.SHAPE_SIZE);
   }
 
   #drawTrail() {
@@ -81,10 +85,10 @@ function setup() {
   let velocity = createVector(0, 0);
   moveQueue = new PositionQueue(position, velocity); 
   moveQueue.enableShape(true); 
-  moveQueue.enableTrail(false);
+  moveQueue.enableTrail(true);
   frameRate(60);
 
-  textSize(30);
+  textSize(15);
   textAlign(CENTER, CENTER);
 }
 
