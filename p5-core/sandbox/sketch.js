@@ -7,6 +7,7 @@ class PositionQueue {
     this.velocity = velocity;
     this.shapeEnabled = false; 
     this.trailEnabled = false;
+    this.textPositionEnabled = false;
     this.targets = [];
     
   }
@@ -21,6 +22,10 @@ class PositionQueue {
 
   enableTrail(flag){
     this.trailEnabled = flag;
+  }
+
+  enableDrawPositionText(flag){
+    this.textPositionEnabled = flag;
   }
 
   #processMovement() {
@@ -63,7 +68,10 @@ class PositionQueue {
 
   draw() {
     if (this.targets.length > 0) {
-      this.#drawPositionText();
+      if(this.textPositionEnabled){
+        this.#drawPositionText();
+      }
+      
       this.#processMovement();
     }
 
@@ -86,6 +94,7 @@ function setup() {
   moveQueue = new PositionQueue(position, velocity); 
   moveQueue.enableShape(true); 
   moveQueue.enableTrail(true);
+  moveQueue.enableDrawPositionText(true);
   frameRate(60);
 
   textSize(15);
