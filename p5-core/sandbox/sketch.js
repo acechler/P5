@@ -9,27 +9,36 @@ class PositionQueue {
     this.targets.push(newPosition);
   }
 
-  draw() {
-    if (this.targets.length > 0) {
-      let lastElement = this.targets[this.targets.length - 1];
-      text(`${lastElement.x}, ${lastElement.y}`, 100, 50);
 
-      let target = createVector(this.targets[0].x, this.targets[0].y);
-      let direction = p5.Vector.sub(target, this.position);
-      
-      if (direction.mag() > 1) {
-        direction.setMag(2);
-        this.position.add(direction);
-      } else {
-        this.targets.shift();
-      }
+
+  #processMovement(){
+    let target = createVector(this.targets[0].x, this.targets[0].y);
+    let direction = p5.Vector.sub(target, this.position);
+    
+    if (direction.mag() > 1) {
+      direction.setMag(2);
+      this.position.add(direction);
+    } else {
+      this.targets.shift();
     }
+  }
 
+
+  #drawPositionText(){
+    let lastElement = this.targets[this.targets.length - 1];
+    text(`${lastElement.x}, ${lastElement.y}`, 100, 50);
+
+  }
+
+  #drawShape(){
     stroke(0);
     strokeWeight(2);
     fill(127);
     ellipse(this.position.x, this.position.y, 48, 48);
 
+  }
+
+  #drawTrail(){
     stroke(100, 100, 250, 100);
     beginShape();
     vertex(this.position.x, this.position.y);
@@ -37,6 +46,16 @@ class PositionQueue {
       vertex(target.x, target.y);
     }
     endShape();
+  }
+
+  draw() {
+    if (this.targets.length > 0) {
+      this.#drawPositionText();
+      this.#processMovement();
+    }
+
+    this.#drawShape();
+    this.#drawTrail();
   }
 }
 
