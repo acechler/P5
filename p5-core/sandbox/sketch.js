@@ -3,7 +3,7 @@ class Human{
   constructor(position, velocity){
     this.position = position;
     this.velocity = velocity;
-    movementQueue = new PositionQueue()
+    let movementQueue = new PositionQueue(position, velocity);
     // Although default, I really want to know the state of these.
     movementQueue.enableShape(false);
     movementQueue.enableTrail(false);
@@ -17,13 +17,15 @@ class Human{
   }
 }
 
-
+let testHuman;
 
 function setup() {
   createCanvas(400, 200);
+  testHuman = new Human(25,25,40);
 }
 
 function draw() {
   background(255);
+  testHuman.draw();
 }
 
