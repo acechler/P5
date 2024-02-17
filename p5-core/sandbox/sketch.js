@@ -1,5 +1,4 @@
 
-/** 
 class Human{
   constructor(position, velocity){
     this.position = position;
@@ -18,7 +17,7 @@ class Human{
   }
 }
 
-*/
+
 
 function setup() {
   createCanvas(400, 200);
