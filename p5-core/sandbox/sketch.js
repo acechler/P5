@@ -2,6 +2,8 @@ class PositionQueue {
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
+    this.shapeEnabled = false; 
+    this.trailEnabled = false;
     this.targets = [];
   }
 
@@ -9,9 +11,17 @@ class PositionQueue {
     this.targets.push(newPosition);
   }
 
+  enableShape(flag) { 
+    this.shapeEnabled = flag; 
+  }
 
+  enableTrail(flag){
+    this.trailEnabled = flag;
+  }
 
-  #processMovement(){
+  #processMovement() {
+    if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
+
     let target = createVector(this.targets[0].x, this.targets[0].y);
     let direction = p5.Vector.sub(target, this.position);
     
@@ -23,22 +33,21 @@ class PositionQueue {
     }
   }
 
-
-  #drawPositionText(){
+  #drawPositionText() {
+    if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
+    
     let lastElement = this.targets[this.targets.length - 1];
     text(`${lastElement.x}, ${lastElement.y}`, 100, 50);
-
   }
 
-  #drawShape(){
+  #drawShape() {
     stroke(0);
     strokeWeight(2);
     fill(127);
     ellipse(this.position.x, this.position.y, 48, 48);
-
   }
 
-  #drawTrail(){
+  #drawTrail() {
     stroke(100, 100, 250, 100);
     beginShape();
     vertex(this.position.x, this.position.y);
@@ -54,8 +63,12 @@ class PositionQueue {
       this.#processMovement();
     }
 
-    this.#drawShape();
-    this.#drawTrail();
+    if (this.shapeEnabled) {
+      this.#drawShape();
+    }
+    if (this.trailEnabled){
+      this.#drawTrail();
+    }
   }
 }
 
@@ -67,6 +80,8 @@ function setup() {
   let position = createVector(100, 100);
   let velocity = createVector(0, 0);
   moveQueue = new PositionQueue(position, velocity); 
+  moveQueue.enableShape(true); 
+  moveQueue.enableTrail(false);
   frameRate(60);
 
   textSize(30);
