@@ -1,27 +1,30 @@
 
+/** 
+class Human{
+  constructor(position, velocity){
+    this.position = position;
+    this.velocity = velocity;
+    movementQueue = new PositionQueue()
+    // Although default, I really want to know the state of these.
+    movementQueue.enableShape(false);
+    movementQueue.enableTrail(false);
+  }
 
-let moveQueue;
+  draw(){
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    ellipse(this.position.x, this.position.y, PositionQueue.SHAPE_SIZE, PositionQueue.SHAPE_SIZE);
+  }
+}
+
+*/
 
 function setup() {
-  createCanvas(640, 360);
-  background(255);
-  let position = createVector(100, 100);
-  let velocity = createVector(0, 0);
-  moveQueue = new PositionQueue(position, velocity); 
-  moveQueue.enableShape(true); 
-  moveQueue.enableTrail(true);
-  moveQueue.enableDrawPositionText(true);
-  frameRate(60);
-
-  textSize(15);
-  textAlign(CENTER, CENTER);
+  createCanvas(400, 200);
 }
 
 function draw() {
   background(255);
-  moveQueue.draw();
 }
 
-function mousePressed() {
-  moveQueue.addPosition({x: mouseX, y: mouseY});
-}
