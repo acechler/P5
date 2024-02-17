@@ -1,6 +1,11 @@
+# Position Queue
+
+Object that handles a queue of positions for an entity to follow
+
+```js
+
 class PositionQueue {
 
-  // Size of guide shape
   static SHAPE_SIZE = 8;
 
   constructor(position, velocity) {
@@ -110,3 +115,5 @@ function draw() {
 function mousePressed() {
   moveQueue.addPosition({x: mouseX, y: mouseY});
 }
+
+```
