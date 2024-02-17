@@ -10,46 +10,41 @@
     x = newX;
     y = newY;
   }
-
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Example 1-2: Bouncing Ball, with p5.Vector!
-let position;
-let velocity;
-let target;
-function setup() {
-  createCanvas(640, 360);
-  background(255);
-  position = createVector(100, 100);
-  velocity = createVector(2.5, 5);
-  target = createVector(0,0);
-}
-
-function draw() {
-  background(255);
-
-  // Add the current speed to the position.
-  position.add(velocity);
-
-  if ((position.x > width) || (position.x < 0)) {
-    velocity.x = velocity.x * -1;
+  function setup() {
+    createCanvas(640, 360);
+    background(255);
+    position = createVector(100, 100); // Starting position
+    velocity = createVector(0, 0); // Initial velocity is zero
+    target = position.copy(); // Initialize target at starting position
   }
-  if ((position.y > height) || (position.y < 0)) {
-    velocity.y = velocity.y * -1;
+  
+  function draw() {
+    background(255);
+    
+    let direction = p5.Vector.sub(target, position); // Calculate direction towards target
+    if (direction.mag() > 1) { // Check if the shape is close to the target
+      direction.setMag(2); // Set the magnitude of the direction to control speed
+      velocity = direction; // Update velocity to move towards the target
+      position.add(velocity); // Add the velocity to the position
+    } else {
+      velocity.set(0, 0); // Stop the movement when close to the target
+    }
+  
+    if ((position.x > width) || (position.x < 0)) {
+      velocity.x = velocity.x * -1;
+    }
+    if ((position.y > height) || (position.y < 0)) {
+      velocity.y = velocity.y * -1;
+    }
+  
+    // Display circle at the current position
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    ellipse(position.x, position.y, 48, 48);
   }
-
-  line(position.x, position.y, target.x, target.y);
-
-  // Display circle at x position
-  stroke(0);
-  strokeWeight(2);
-  fill(127);
-  ellipse(position.x, position.y, 48, 48);
-}
-
-function mousePressed(){
-  target.x = mouseX;
-  target.y = mouseY;
-}
+  
+  function mousePressed() {
+    target.set(mouseX, mouseY); // Update target to mouse position
+  }
+  
