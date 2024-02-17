@@ -1,5 +1,6 @@
 class PositionQueue {
 
+  // Size of guide shape
   static SHAPE_SIZE = 8;
 
   constructor(position, velocity) {
