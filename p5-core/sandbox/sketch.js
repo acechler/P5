@@ -10,6 +10,7 @@ class Human {
     this.movementQueue = new PositionQueue(this.position, this.velocity); // Now a property of Human
     this.movementQueue.enableShape(false);
     this.movementQueue.enableTrail(false);
+    this.movementQueue.enableWrappedEdges(true);
   }
 
 
