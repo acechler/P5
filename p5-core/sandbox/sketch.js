@@ -1,4 +1,5 @@
 class Human {
+  
   constructor(position, velocity) {
     // Assuming position and velocity should be vectors
     this.position = createVector(position, position); // Corrected for demonstration
@@ -12,7 +13,7 @@ class Human {
   draw() {
     // Corrected to use properties of the Human class
     this.movementQueue.draw();
-    rect(this.position.x, this.position.y, 50, 50); // Corrected to use Human's position
+    rect(this.position.x, this.position.y, 8, 8); // Corrected to use Human's position
   }
 }
 
