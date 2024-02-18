@@ -1,8 +1,8 @@
 class Human {
 
   constructor(position, velocity) {
-    // Assuming position and velocity should be vectors
-    this.position = createVector(position, position); // Corrected for demonstration
+
+    this.position = createVector(position, position); 
     this.velocity = createVector(velocity, velocity); // Creating vectors for position & velocity
     
     this.size = 8;
@@ -26,10 +26,10 @@ class Human {
   }
 
   draw() {
-    // Corrected to use properties of the Human class
+
     this.movementQueue.draw();
     fill(1);
-    rect(this.position.x-(this.size/2), this.position.y-(this.size/2), this.size, this.size); // Corrected to use Human's position
+    rect(this.position.x-(this.size/2), this.position.y-(this.size/2), this.size, this.size);
   }
 }
 
@@ -37,8 +37,7 @@ let testHuman;
 
 function setup() {
   createCanvas(800, 800);
-  // Create a Human instance correctly. Assuming the parameters are intended to be initial positions.
-  testHuman = new Human(); // Corrected to match Human constructor
+  testHuman = new Human(); 
   testHuman.debug(true);
 }
 
