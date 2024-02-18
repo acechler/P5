@@ -1,112 +1,48 @@
-class PositionQueue {
-
-  // Size of guide shape
-  static SHAPE_SIZE = 8;
-
+class Human {
+  
   constructor(position, velocity) {
-    this.position = position;
-    this.velocity = velocity;
-    this.shapeEnabled = false; 
-    this.trailEnabled = false;
-    this.textPositionEnabled = false;
-    this.targets = [];
+    // Assuming position and velocity should be vectors
+    this.position = createVector(position, position); // Corrected for demonstration
+    this.velocity = createVector(velocity, velocity); // Creating vectors for position & velocity
     
+    this.movementQueue = new PositionQueue(this.position, this.velocity); // Now a property of Human
+    this.movementQueue.enableShape(false);
+    this.movementQueue.enableTrail(false);
   }
 
-  addPosition(newPosition) {
-    this.targets.push(newPosition);
-  }
 
-  enableShape(flag) { 
-    this.shapeEnabled = flag; 
-  }
-
-  enableTrail(flag){
-    this.trailEnabled = flag;
-  }
-
-  enableDrawPositionText(flag){
-    this.textPositionEnabled = flag;
-  }
-
-  #processMovement() {
-    if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
-
-    let target = createVector(this.targets[0].x, this.targets[0].y);
-    let direction = p5.Vector.sub(target, this.position);
-    
-    if (direction.mag() > 1) {
-      direction.setMag(2);
-      this.position.add(direction);
+  debug(flag){
+    if(flag === false){
+      this.movementQueue.enableTrail(false)
+      this.movementQueue.enableDrawPositionText(false);
+      return;
     } else {
-      this.targets.shift();
+      this.movementQueue.enableTrail(true)
+      this.movementQueue.enableDrawPositionText(true);
     }
-  }
-
-  #drawPositionText() {
-    if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
-    
-    let lastElement = this.targets[this.targets.length - 1];
-    text(`${lastElement.x}, ${lastElement.y}`, 100, 50);
-  }
-
-  #drawShape() {
-    stroke(0);
-    strokeWeight(2);
-    fill(127);
-    ellipse(this.position.x, this.position.y, PositionQueue.SHAPE_SIZE, PositionQueue.SHAPE_SIZE);
-  }
-
-  #drawTrail() {
-    stroke(100, 100, 250, 100);
-    beginShape();
-    vertex(this.position.x, this.position.y);
-    for (let target of this.targets) {
-      vertex(target.x, target.y);
-    }
-    endShape();
   }
 
   draw() {
-    if (this.targets.length > 0) {
-      if(this.textPositionEnabled){
-        this.#drawPositionText();
-      }
-      
-      this.#processMovement();
-    }
-
-    if (this.shapeEnabled) {
-      this.#drawShape();
-    }
-    if (this.trailEnabled){
-      this.#drawTrail();
-    }
+    // Corrected to use properties of the Human class
+    this.movementQueue.draw();
+    fill(1);
+    rect(this.position.x, this.position.y, 8, 8); // Corrected to use Human's position
   }
 }
 
-let moveQueue;
+let testHuman;
 
 function setup() {
-  createCanvas(640, 360);
-  background(255);
-  let position = createVector(100, 100);
-  let velocity = createVector(0, 0);
-  moveQueue = new PositionQueue(position, velocity); 
-  moveQueue.enableShape(true); 
-  moveQueue.enableTrail(true);
-  moveQueue.enableDrawPositionText(true);
-  frameRate(60);
-
-  textSize(15);
-  textAlign(CENTER, CENTER);
+  createCanvas(800, 800);
+  // Create a Human instance correctly. Assuming the parameters are intended to be initial positions.
+  testHuman = new Human(); // Corrected to match Human constructor
+  testHuman.debug(true);
 }
 
 function draw() {
   background(255);
-  moveQueue.draw();
+  testHuman.draw();
 }
-
 function mousePressed() {
-  moveQueue.addPosition({x: mouseX, y: mouseY});
+  testHuman.movementQueue.addPosition({x: mouseX, y: mouseY});
 }
