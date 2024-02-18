@@ -33,11 +33,22 @@ class PositionQueue {
 
   // Edge wrapping prevents the ants from traveling out of the canvas view area.
   #wrapEdges() {
-    if (this.position.x > width) this.position.x = 0;
-    if (this.position.x < 0) this.position.x = width;
-    if (this.position.y > height) this.position.y = 0;
-    if (this.position.y < 0) this.position.y = height;
-    
+    if (this.position.x > width) {
+      this.position.x = 0;
+      this.targets.shift();
+    }
+    if (this.position.x < 0) {
+      this.position.x = width;
+      this.targets.shift();
+    }  
+    if (this.position.y > height) { 
+      this.position.y = 0;
+      this.targets.shift();
+    }
+    if (this.position.y < 0) { 
+      this.position.y = height;
+      this.targets.shift();
+    }
   }
 
   #processMovement() {
