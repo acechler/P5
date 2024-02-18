@@ -7,6 +7,7 @@ class PositionQueue {
     this.shapeEnabled = false;
     this.trailEnabled = false;
     this.textPositionEnabled = false;
+    this.wrapEdgesEnabled = false;
     this.targets = [];
   }
 
@@ -26,6 +27,19 @@ class PositionQueue {
     this.textPositionEnabled = flag;
   }
 
+  enableWrappedEdges(flag){
+    this.wrapEdgesEnabled = flag;
+  }
+
+  // Edge wrapping prevents the ants from traveling out of the canvas view area.
+  #wrapEdges() {
+    if (this.position.x > width) this.position.x = 0;
+    if (this.position.x < 0) this.position.x = width;
+    if (this.position.y > height) this.position.y = 0;
+    if (this.position.y < 0) this.position.y = height;
+    
+  }
+
   #processMovement() {
     if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
 
@@ -37,6 +51,9 @@ class PositionQueue {
       this.position.add(direction);
     } else {
       this.targets.shift();
+    }
+    if(this.wrapEdgesEnabled){
+      this.#wrapEdges();
     }
   }
 
