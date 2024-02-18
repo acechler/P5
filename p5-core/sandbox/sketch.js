@@ -1,10 +1,12 @@
 class Human {
-  
+
   constructor(position, velocity) {
     // Assuming position and velocity should be vectors
     this.position = createVector(position, position); // Corrected for demonstration
     this.velocity = createVector(velocity, velocity); // Creating vectors for position & velocity
     
+    this.size = 8;
+
     this.movementQueue = new PositionQueue(this.position, this.velocity); // Now a property of Human
     this.movementQueue.enableShape(false);
     this.movementQueue.enableTrail(false);
@@ -26,7 +28,7 @@ class Human {
     // Corrected to use properties of the Human class
     this.movementQueue.draw();
     fill(1);
-    rect(this.position.x, this.position.y, 8, 8); // Corrected to use Human's position
+    rect(this.position.x-(this.size/2), this.position.y-(this.size/2), this.size, this.size); // Corrected to use Human's position
   }
 }
 

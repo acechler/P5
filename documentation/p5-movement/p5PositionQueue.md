@@ -5,32 +5,30 @@ Object that handles a queue of positions for an entity to follow
 ```js
 
 class PositionQueue {
-
   static SHAPE_SIZE = 8;
 
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
-    this.shapeEnabled = false; 
+    this.shapeEnabled = false;
     this.trailEnabled = false;
     this.textPositionEnabled = false;
     this.targets = [];
-    
   }
 
   addPosition(newPosition) {
     this.targets.push(newPosition);
   }
 
-  enableShape(flag) { 
-    this.shapeEnabled = flag; 
+  enableShape(flag) {
+    this.shapeEnabled = flag;
   }
 
-  enableTrail(flag){
+  enableTrail(flag) {
     this.trailEnabled = flag;
   }
 
-  enableDrawPositionText(flag){
+  enableDrawPositionText(flag) {
     this.textPositionEnabled = flag;
   }
 
@@ -39,7 +37,7 @@ class PositionQueue {
 
     let target = createVector(this.targets[0].x, this.targets[0].y);
     let direction = p5.Vector.sub(target, this.position);
-    
+
     if (direction.mag() > 1) {
       direction.setMag(2);
       this.position.add(direction);
@@ -50,7 +48,7 @@ class PositionQueue {
 
   #drawPositionText() {
     if (this.targets.length === 0) return; // Guard clause to prevent errors if no targets
-    
+
     let lastElement = this.targets[this.targets.length - 1];
     text(`${lastElement.x}, ${lastElement.y}`, 100, 50);
   }
@@ -74,17 +72,17 @@ class PositionQueue {
 
   draw() {
     if (this.targets.length > 0) {
-      if(this.textPositionEnabled){
+      if (this.textPositionEnabled) {
         this.#drawPositionText();
       }
-      
+
       this.#processMovement();
     }
 
     if (this.shapeEnabled) {
       this.#drawShape();
     }
-    if (this.trailEnabled){
+    if (this.trailEnabled) {
       this.#drawTrail();
     }
   }
