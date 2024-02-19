@@ -36,8 +36,12 @@ class Block {
         // Rotates square to 90 degrees and stops.
         if (this.angle > 0 && this.angle < 90) {
             this.angle += 1;
+            if(this.color > 70){
+                this.color -= 3;
+            }
         } else {
             this.angle = 0;
+            this.color = 70;
         }
 
     }
