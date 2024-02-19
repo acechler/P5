@@ -17,7 +17,7 @@ class Block {
         push();
         translate(this.x, this.y);
         rotate(this.angle);
-        rect(0, 0, blockSize, blockSize);
+        rect(0, 0, blockSize - blockOffset, blockSize - blockOffset);
         pop();
     }
 
