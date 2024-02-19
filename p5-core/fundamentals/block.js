@@ -4,9 +4,16 @@ class Block {
         this.x = x;
         this.y = y;
         this.angle = 0;
+        this.color = 255;
+    }
+
+    setColor(color){
+        this.color = color;
     }
 
     draw() {
+        noFill();
+        stroke(this.color);
         push();
         translate(this.x, this.y);
         rotate(this.angle);
