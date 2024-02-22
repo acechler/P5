@@ -1,61 +1,38 @@
 'use strict'
 
-// Define a Timer class
-class Timer {
-  constructor(duration) {
-    this.duration = duration; // Duration in milliseconds
-    this.startTime = null; // When the timer starts
-    this.isRunning = false; // Timer state
-  }
+let distMouse = 50;
+let cols; let rows;
+let blockSize = 10;
+let blockOffset = 4;
+let blocks = [];
 
-  // Start the timer
-  start() {
-    if (!this.isRunning) {
-      this.startTime = millis();
-      this.isRunning = true;
-    }
-  }
-
-  // Check if the timer is done
-  isFinished() {
-    if (!this.isRunning) {
-      return false;
-    }
-
-    const elapsed = millis() - this.startTime;
-    if (elapsed >= this.duration) {
-      this.isRunning = false; // Reset the timer state
-      return true;
-    }
-
-    return false;
-  }
-
-  // Optional: Restart the timer
-  restart() {
-    this.isRunning = false;
-    this.start();
-  }
+function getFrameCountRate(){
+    return frameCount * 0.01;
 }
-let myTimer;
-let x;
-let y;
-let z;
-// draw a spinning box
-// with width, height and depth of 50
+
 function setup() {
-  createCanvas(400, 400, WEBGL);
-  describe('a white box rotating in 3D space');
-  x = 25;
-  y = 25;
-  z = 25;
-}
+    createCanvas(800, 800);
+    rectMode(CENTER);
+    angleMode(DEGREES);
+    cols = width/blockSize;
+    rows = height/blockSize;
+    for(let i = 0; i < cols; i++){
+        blocks[i] = [];
+        for(let j = 0; j < rows; j++){
+            blocks[i][j] = new Block(blockSize/2 + i*blockSize, blockSize/2 + j*blockSize);
+            blocks[i][j].setColor('gray');
+        }
+    }
 
+}
+  
 function draw() {
-  background(200);
-  rotateX(frameCount * 0.01);
-  rotateY(frameCount * 0.01);
-
-
-  box(50);
+    background(0);
+    for(let i = 0; i < cols; i++){
+        for(let j = 0; j < rows; j++){
+            blocks[i][j].move();
+            blocks[i][j].draw();
+        }
+    }
 }
+  
