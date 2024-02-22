@@ -10,7 +10,7 @@ function getFrameCountRate(){
 }
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(400, 400);
     rectMode(CENTER);
     angleMode(DEGREES);
     cols = width/blockSize;
