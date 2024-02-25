@@ -1,40 +1,33 @@
-'use strict'
-
-let distMouse = 50;
-let cols; let rows;
-let blockSize = 10;
-let blockOffset = 4;
-let blocks = [];
-let blocksColor = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'white', 'black'];
-
-function getFrameCountRate(){
-    return frameCount * 0.01;
-}
+// create a bouncing ball
+let ball = {
+    x: 100,
+    y: 100,
+    diameter: 50,
+    xSpeed: 3,
+    ySpeed: 2
+};
 
 function setup() {
-    createCanvas(800, 800);
-    rectMode(CENTER);
-    angleMode(DEGREES);
-    cols = width/blockSize;
-    rows = height/blockSize;
-    for(let i = 0; i < cols; i++){
-        blocks[i] = [];
-        for(let j = 0; j < rows; j++){
-            blocks[i][j] = new Block(blockSize/2 + i*blockSize, blockSize/2 + j*blockSize);
-            let color = blocksColor[int(random(0, blocksColor.length))];
-            blocks[i][j].setColor(color);
-        }
-    }
-
+    createCanvas(400, 400);
 }
-  
+
 function draw() {
     background(0);
-    for(let i = 0; i < cols; i++){
-        for(let j = 0; j < rows; j++){
-            blocks[i][j].move();
-            blocks[i][j].draw();
-        }
+
+    // Draw the ball
+    fill(255);
+    noStroke();
+    ellipse(ball.x, ball.y, ball.diameter, ball.diameter);
+
+    // Update the ball's position
+    ball.x += ball.xSpeed;
+    ball.y += ball.ySpeed;
+
+    // Check for bouncing
+    if (ball.x < ball.diameter / 2 || ball.x > width - ball.diameter / 2) {
+        ball.xSpeed *= -1;
+    }
+    if (ball.y < ball.diameter / 2 || ball.y > height - ball.diameter / 2) {
+        ball.ySpeed *= -1;
     }
 }
-  
