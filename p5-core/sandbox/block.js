@@ -41,7 +41,7 @@ class Block {
             }
         } else {
             this.angle = 0;
-            //this.color = 70;
+            this.color = 70;
         }
 
     }

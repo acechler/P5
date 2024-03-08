@@ -1,11 +1,8 @@
-'use strict'
-
 let distMouse = 50;
 let cols; let rows;
-let blockSize = 10;
+let blockSize = 64;
 let blockOffset = 4;
 let blocks = [];
-let blocksColor = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'white', 'black'];
 
 function getFrameCountRate(){
     return frameCount * 0.01;
@@ -21,8 +18,7 @@ function setup() {
         blocks[i] = [];
         for(let j = 0; j < rows; j++){
             blocks[i][j] = new Block(blockSize/2 + i*blockSize, blockSize/2 + j*blockSize);
-            let color = blocksColor[int(random(0, blocksColor.length))];
-            blocks[i][j].setColor(color);
+            blocks[i][j].setColor('gray');
         }
     }
 
