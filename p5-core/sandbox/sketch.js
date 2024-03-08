@@ -7,11 +7,12 @@ function setup() {
     rectMode(CENTER);
     angleMode(DEGREES);
 
-
+    
 }
   
 function draw() {
     background(220);
+
 
 }
   
